@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     TextView output;
     String inputString;
     String aftertransform;
-    double aftercalcu;
 
 
     @Override
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             //aftertransform=transforming.doTransform();
             //
             // Formula formula = new Formula();
-            aftercalcu = Formula.getInstnace().formula(inputString);
+            double aftercalcu = Formula.getInstnace().formula(inputString);
             //aftercalcu = formula.formula(aftertransform);
             output.setText(Double.toString(aftercalcu));
         }

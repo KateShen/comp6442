@@ -15,13 +15,14 @@ public class Transforming {
     }
 
     public String doTransform(){
+
         boolean ischar = false;
         for(int i = 0; i < input.length(); i++) {
             char specificchar = input.charAt(i);
             if(specificchar == ' ') {
                 continue;
             } else if(specificchar == '-' && (output.equals("") || ischar)) {
-                output = output + "$" + specificchar;
+                output = output + "#" + specificchar;
                 ischar = false;
                 continue;
             }
@@ -52,7 +53,7 @@ public class Transforming {
                     if(!ischar) {
                         output = output + specificchar;
                     } else {
-                        output = output + "$" + specificchar;
+                        output = output + "#" + specificchar;
                     }
                     ischar = false;
                     break;
@@ -60,7 +61,7 @@ public class Transforming {
         }
 
         while (!stackfortrans.isEmpty()){
-            output=output + "$" + stackfortrans.pop();
+            output=output + "#" + stackfortrans.pop();
         }
         return output;
     }
@@ -85,7 +86,7 @@ public class Transforming {
                     stackfortrans.push(inlist);
                     break;
                 }else {
-                    output = output + "$" + inlist;
+                    output = output + "#" + inlist;
                 }
             }
         }
@@ -98,7 +99,7 @@ public class Transforming {
            if (inlist == '('){
                break;
            }else {
-               output=output + "$" + inlist;
+               output=output + "#" + inlist;
            }
        }
 

@@ -27,7 +27,8 @@ public class Formula {
         double value2 = 0;
 
         String suffix = transformToSuffix(infix);
-        String[] nodes = suffix.split("$");
+        String[] nodes = suffix.split("#");
+        System.out.println(nodes[0]);
         for (String node : nodes) {
             if (node.equals("")) {
                 continue;
@@ -61,10 +62,4 @@ public class Formula {
         return values.get(0);
     }
 
-  /*  public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.next();
-        double value = Formula.getInstnace().formula(str);
-        System.err.println(value);
-    }*/
 }
