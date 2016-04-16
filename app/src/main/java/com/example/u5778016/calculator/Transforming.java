@@ -1,74 +1,91 @@
 package com.example.u5778016.calculator;
 
-import java.util.Stack;
-
 /**
  * Created by u5778016 on 13/04/16.
  */
 public class Transforming {
-    private reStack stackfortrans;
+    private ReStack stackfortrans;
     private String input;
-    private String output="";
+    private String output = "";
 
     public Transforming(String input){
-        this.input=input;
-        int size=input.length();
-        stackfortrans=new reStack(size);
+        this.input = input;
+        int size = input.length();
+        stackfortrans = new ReStack(size);
     }
 
     public String doTransform(){
-
-        for (int i=0;i<input.length();i++){
-            char specificchar=input.charAt(i);
-            switch (specificchar){
+        boolean ischar = false;
+        for(int i = 0; i < input.length(); i++) {
+            char specificchar = input.charAt(i);
+            if(specificchar == ' ') {
+                continue;
+            } else if(specificchar == '-' && (output.equals("") || ischar)) {
+                output = output + "$" + specificchar;
+                ischar = false;
+                continue;
+            }
+            switch (specificchar) {
                 case '+':
                 case '-':
-                    compareandadd(specificchar,1);
+                    compareandadd(specificchar, 1);
+                    ischar = true;
                     break;
                 case '*':
                 case '/':
-                    compareandadd(specificchar,2);
+                    compareandadd(specificchar, 2);
+                    ischar = true;
+                    break;
+                case '^':
+                    compareandadd(specificchar, 3);
+                    ischar = true;
                     break;
                 case '(':
                     stackfortrans.push(specificchar);
+                    ischar = true;
                     break;
                 case ')':
                     getLast(specificchar);
+                    ischar = true;
                     break;
                 default:
-                    output=output+specificchar;
+                    if(!ischar) {
+                        output = output + specificchar;
+                    } else {
+                        output = output + "$" + specificchar;
+                    }
+                    ischar = false;
                     break;
-
             }
         }
 
         while (!stackfortrans.isEmpty()){
-            output=output+stackfortrans.pop();
+            output=output + "$" + stackfortrans.pop();
         }
-
         return output;
-
     }
 
 
     public void compareandadd(char inputstr,int status){
         while (!stackfortrans.isEmpty()){
-            char inlist=stackfortrans.pop();
-            if (inlist=='('){
+            char inlist = stackfortrans.pop();
+            if (inlist == '('){
                 stackfortrans.push(inlist);
                 break;
-            }else {
-                int status2;
-                if (inlist=='+' ||inlist=='-'){
-                    status2=1;
-                }else {
-                    status2=2;
+            } else {
+                int status2 = 0;
+                if (inlist == '+' || inlist == '-'){
+                    status2 = 1;
+                } else if(inlist == '*' || inlist == '/') {
+                    status2 = 2;
+                } else if (inlist == '^') {
+                    status2 = 3;
                 }
-                if (status2<status){
+                if (status2 < status){
                     stackfortrans.push(inlist);
                     break;
                 }else {
-                    output=output+inlist;
+                    output = output + "$" + inlist;
                 }
             }
         }
@@ -77,11 +94,11 @@ public class Transforming {
 
    public void getLast(char ch){
        while (! stackfortrans.isEmpty()){
-           char inlist=stackfortrans.pop();
-           if (inlist=='('){
+           char inlist = stackfortrans.pop();
+           if (inlist == '('){
                break;
            }else {
-               output=output+inlist;
+               output=output + "$" + inlist;
            }
        }
 

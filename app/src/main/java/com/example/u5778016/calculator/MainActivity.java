@@ -12,15 +12,11 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    HashMap weight;
-
-    ArrayList dengshi;
-    ArrayList dengshi1;
     EditText input;
     TextView output;
     String inputString;
     String aftertransform;
-    int aftercalcu;
+    double aftercalcu;
 
 
     @Override
@@ -30,23 +26,25 @@ public class MainActivity extends AppCompatActivity {
 
        // weight=op.gethashmap();
 
-        input=(EditText)findViewById(R.id.input);
-        output=(TextView)findViewById(R.id.output);
+        input = (EditText)findViewById(R.id.input);
+        output = (TextView)findViewById(R.id.output);
         //analysisinput();
         //System.out.println(weight.get(0).toString());
     }
 
     public void analysisinput(View view){
-        inputString=input.getText().toString();
+        inputString = input.getText().toString();
 
         if (inputString.equals("") || inputString==null){Toast.makeText(MainActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
         }
         else {
-            Transforming transforming=new Transforming(inputString);
-            aftertransform=transforming.doTransform();
-            //PostfixEvalutor postfixEvalutor=new PostfixEvalutor();
-           // aftercalcu=postfixEvalutor.evaluate(aftertransform);
-            output.setText(aftertransform.toString());
+            //Transforming transforming=new Transforming(inputString);
+            //aftertransform=transforming.doTransform();
+            //
+            // Formula formula = new Formula();
+            aftercalcu = Formula.getInstnace().formula(inputString);
+            //aftercalcu = formula.formula(aftertransform);
+            output.setText(Double.toString(aftercalcu));
         }
     }
 }
