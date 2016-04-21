@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-com.example.u5721067.easynote">
+
+    <item
+        android:id="@+id/action_view"
+        android:title="ViewAll"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_exit"
+        android:title="Exit"
+        app:showAsAction="never"/>
+
+</menu>
