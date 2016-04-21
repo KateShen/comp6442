@@ -38,17 +38,14 @@ public class MainActivity extends Activity {
         }
 
         int idList[] = {R.id.bt_0, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.bt_7, R.id.bt_8, R.id.bt_9,
-                R.id.bt_div, R.id.bt_mul, R.id.bt_minus, R.id.bt_plus, R.id.bt_left, R.id.bt_right, R.id.bt_point,
-                R.id.bt_cos, R.id.bt_sin, R.id.bt_tan, R.id.bt_e, R.id.bt_pi, R.id.bt_power, R.id.bt_lg, R.id.bt_ln, R.id.bt_mod, R.id.bt_root};
+                R.id.bt_div, R.id.bt_mul, R.id.bt_minus, R.id.bt_plus, R.id.bt_left, R.id.bt_right, R.id.bt_point, R.id.bt_lg, R.id.bt_ln,
+                R.id.bt_cos, R.id.bt_sin, R.id.bt_tan, R.id.bt_e, R.id.bt_pi, R.id.bt_power, R.id.bt_mod, R.id.bt_root};
         for(int id : idList) {
             View v = findViewById(id);
             v.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     String str = input.getText().toString();
                     switch (v.getId()) {
-                        case R.id.bt_clear:
-                            input.setText("");
-                            break;
                         case R.id.bt_point:
                             input.setText(str + ".");
                             break;
@@ -60,6 +57,36 @@ public class MainActivity extends Activity {
                             break;
                         case R.id.bt_minus:
                             input.setText(str + "-");
+                            break;
+                        case R.id.bt_sin:
+                            input.setText(str + "sin");
+                            break;
+                        case R.id.bt_cos:
+                            input.setText(str + "cos");
+                            break;
+                        case R.id.bt_tan:
+                            input.setText(str + "tan");
+                            break;
+                        case R.id.bt_lg:
+                            input.setText(str + "lg");
+                            break;
+                        case R.id.bt_ln:
+                            input.setText(str + "ln");
+                            break;
+                        case R.id.bt_power:
+                            input.setText(str + "^");
+                            break;
+                        case R.id.bt_mod:
+                            input.setText(str + "%");
+                            break;
+                        case R.id.bt_root:
+                            input.setText(str + "√");
+                            break;
+                        case R.id.bt_e:
+                            input.setText(str + "e");
+                            break;
+                        case R.id.bt_pi:
+                            input.setText(str + "π");
                             break;
                         case R.id.bt_plus:
                             input.setText(str + "+");

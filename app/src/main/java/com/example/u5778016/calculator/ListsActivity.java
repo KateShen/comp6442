@@ -18,11 +18,10 @@ public class ListsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
-
         _db = new HistoryDB(this);
 
-        String[] dataColumns = new String[] {"title", "content"};
-        int[] viewIds = new int[] { R.id.formula, R.id.result};
+        String[] dataColumns = new String[] {"title", "content", "created"};
+        int[] viewIds = new int[] { R.id.formula, R.id.result, R.id.time};
 
         Cursor cursor = _db.getAllHisCursor();
 

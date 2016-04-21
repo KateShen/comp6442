@@ -30,7 +30,7 @@ public class HistoryDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createNoteTableSql = "CREATE TABLE " + HIS_TABLE_NAME + " (" +
                 HIS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + HIS_FORMULA +
-                " TEXT," + HIS_RESULT + " TEXT," + HIS_CREATED + " INTEGER," + ");";
+                " TEXT," + HIS_RESULT + " TEXT," + HIS_CREATED + " INTEGER" + ");";
         db.execSQL(createNoteTableSql);
     }
 
@@ -62,7 +62,7 @@ public class HistoryDB extends SQLiteOpenHelper {
         Cursor cursor = db.query(HIS_TABLE_NAME, HIS_PROJECTION, HIS_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        History history = new History(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getLong(3));
+        History history = new History(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
         return history;
     }
 
