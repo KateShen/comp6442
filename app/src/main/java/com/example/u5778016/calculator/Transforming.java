@@ -34,6 +34,7 @@ public class Transforming {
                     break;
                 case '*':
                 case '/':
+                case '%':
                     compareandadd(specificchar, 2);
                     ischar = true;
                     break;

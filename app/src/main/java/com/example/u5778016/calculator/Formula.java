@@ -49,10 +49,16 @@ public class Formula {
                 value2 = values.remove(values.size() - 1);
                 value1 = values.remove(values.size() - 1);
                 result = value1 / value2;
+            } else if (node.equals("%")) {
+                value2 = values.remove(values.size() - 1);
+                value1 = values.remove(values.size() - 1);
+                result = value1 % value2;
             } else if (node.equals("^")) {
                 value2 = values.remove(values.size() - 1);
                 value1 = values.remove(values.size() - 1);
                 result = Math.pow(value1, value2);
+            } else if (node.equals("π")) {
+                result = Math.PI;
             } else {
                 result = Double.parseDouble(node);
             }
