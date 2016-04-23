@@ -8,10 +8,10 @@
 
     <EditText
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input"
-        android:hint="Please input a formula"
-        android:height="50dp"/>
+        android:layout_height="150dp"
+        android:id="@+id/field"
+        android:gravity="fill_horizontal"
+        android:hint="Please input a formula" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +20,17 @@
         android:orientation="horizontal">
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:textColor="#ff0000"
             android:text="CLEAR"
             android:onClick="clearAll"
-            android:id="@+id/bt_clear" />
+            android:id="@+id/bt_clear"
+            android:singleLine="false" />
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="HISTORY"
@@ -257,12 +261,5 @@
             android:id="@+id/consequence" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Calculate Result"
-        android:textSize="12pt"
-        android:id="@+id/output" />
 
 </LinearLayout>

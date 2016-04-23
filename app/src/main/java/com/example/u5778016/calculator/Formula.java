@@ -59,6 +59,14 @@ public class Formula {
                 result = Math.pow(value1, value2);
             } else if (node.equals("π")) {
                 result = Math.PI;
+            } else if (node.equals("e")) {
+                double e = 1.0;
+                double t = 1.0;
+                for(int i = 1; i < 20; i++) {
+                    t /= i;
+                    e += t;
+                }
+                result = e;
             } else {
                 result = Double.parseDouble(node);
             }

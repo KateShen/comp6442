@@ -2,40 +2,36 @@ package com.example.u5778016.calculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private EditText input;
-    private TextView output;
     private String inputString;
-    private int hisId;
     private HistoryDB db;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        input = (EditText)findViewById(R.id.input);
-        output = (TextView)findViewById(R.id.output);
+        input = (EditText)findViewById(R.id.field);
+        input.setBackgroundColor(Color.parseColor("#ffeeaa"));
         db = new HistoryDB(this);
-        Intent intent = getIntent();
-        hisId = intent.getIntExtra(ListsActivity.EXTRA_HIS_ID, -1);
 
-        if (hisId > 0) {
-            History history = db.getHis(hisId);
-            input.setText(history.getFormula());
-            output.setText(history.getResult());
-        }
+        /*GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setStroke(2, Color.BLACK);*/
+
 
         int idList[] = {R.id.bt_0, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.bt_7, R.id.bt_8, R.id.bt_9,
                 R.id.bt_div, R.id.bt_mul, R.id.bt_minus, R.id.bt_plus, R.id.bt_left, R.id.bt_right, R.id.bt_point, R.id.bt_lg, R.id.bt_ln,
@@ -166,7 +162,10 @@ public class MainActivity extends Activity {
         }
         else {
             double aftercalcu = Formula.getInstnace().formula(inputString);
-            output.setText(Double.toString(aftercalcu));
+            if(aftercalcu % 1 == 0)
+                input.setText(Integer.toString((int) aftercalcu));
+            else
+                input.setText(Double.toString(aftercalcu));
             save();
         }
     }
@@ -181,8 +180,8 @@ public class MainActivity extends Activity {
     }
 
     public void save() {
-        String formula = input.getText().toString();
-        String result = output.getText().toString();
+        String formula = inputString;
+        String result = input.getText().toString();
         /*judge whether formula or result is null
           If yes, it will give a toast. If no, it will put formula and result insert into database.
           */
@@ -198,9 +197,9 @@ public class MainActivity extends Activity {
 
     public final int ToDatabase()
     {
-        //put title and content to the database
-        String formula = input.getText().toString();
-        String result = output.getText().toString();
+        //put formula and result to the database
+        String formula = inputString;
+        String result = input.getText().toString();
         int newId = -1;
         History newNote = new History(formula, result);
         newId = db.addHis(newNote);

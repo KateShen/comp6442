@@ -78,7 +78,7 @@ public class Transforming {
                 int status2 = 0;
                 if (inlist == '+' || inlist == '-'){
                     status2 = 1;
-                } else if(inlist == '*' || inlist == '/') {
+                } else if(inlist == '*' || inlist == '/' || inlist == '%') {
                     status2 = 2;
                 } else if (inlist == '^') {
                     status2 = 3;
