@@ -14,7 +14,7 @@ public class Formula {
         return instance;
     }
 
-    private String transformToSuffix(String infix) {
+    public String transformToSuffix(String infix) {
         Transforming trans = new Transforming(infix);
         return trans.doTransform();
     }

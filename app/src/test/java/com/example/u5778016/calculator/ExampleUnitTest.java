@@ -10,6 +10,6 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        assertEquals("#1#2#+#3#4#5#+#*#*", Formula.getInstnace().transformToSuffix("(1+2)*(3*(4+5))"));
     }
 }
