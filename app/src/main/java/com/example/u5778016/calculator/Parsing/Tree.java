@@ -30,6 +30,10 @@ public class Tree extends Expression {
         }
     }
 
+    public String show(){
+        return "(" + left.show() + "[" + node + "]" + right.show() + ")";
+    }
+
     public static Expression generate(String infix){
         //Transform the string to postfix
         Transforming t = new Transforming(infix);
@@ -39,15 +43,17 @@ public class Tree extends Expression {
         ArrayList<String> nodes = new ArrayList<>(Arrays.asList(postfix.split("#")));
 
         Stack tokens = new Stack();
-        int index = 0;
-        while(index < nodes.size()){
-            String current = nodes.get(index);
+        for(int i = 1; i < nodes.size(); i++){
+            String current = nodes.get(i);
             if(NumberUtils.isNumber(current)){
-                tokens.push(current);
+                tokens.push(new Number(Double.parseDouble(current)));
             }else{
-                //it is a operator :)
+                    Expression b = (Expression) tokens.pop();
+                    Expression a = (Expression) tokens.pop();
+                    tokens.push(new Tree(current, a , b));
+                //tokens.push(new Tree(current, a , b));
             }
         }
-        return new Number(0);
+        return (Expression) tokens.pop();
     }
 }
