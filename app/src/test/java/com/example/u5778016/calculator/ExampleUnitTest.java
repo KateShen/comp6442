@@ -15,12 +15,13 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void testParser() throws Exception {
-        assertEquals("((1.3[+]0.2)[*]((38.0[*](47.72[/](56.3[-]24.0)))[^](3.5[-]1.2)))",Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)").show());
+        assertEquals("((1.3[+]0.2)[*]((38.0[*](47.72[/](56.3[-]24.0)))[^](3.5[-]1.2)))",Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).show());
     }
 
     @Test
     public void testEvaluate() throws Exception {
-        assertEquals(Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)").evaluate(), 15828.4624546 , 0.001);
-        System.out.println("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2) equals " + Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)").evaluate());
+        assertEquals(Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).evaluate(), 15828.4624546 , 0.001);
+        System.out.println("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2) equals " + Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).evaluate());
+        assertEquals(Integer.toBinaryString((int) Tree.generate("(1 + 10)^(1 + 1 * 10)", 2).evaluate()), "11011");
     }
 }

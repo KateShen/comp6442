@@ -34,7 +34,7 @@ public class Tree extends Expression {
         return "(" + left.show() + "[" + node + "]" + right.show() + ")";
     }
 
-    public static Expression generate(String infix){
+    public static Expression generate(String infix, int base){
         //Transform the string to postfix
         Transforming t = new Transforming(infix);
         String postfix = t.doTransform();
@@ -43,11 +43,25 @@ public class Tree extends Expression {
         ArrayList<String> nodes = new ArrayList<>(Arrays.asList(postfix.split("#")));
 
         Stack tokens = new Stack();
-        for(int i = 1; i < nodes.size(); i++){
-            String current = nodes.get(i);
-            if(NumberUtils.isNumber(current)){
-                tokens.push(new Number(Double.parseDouble(current)));
-            }else{
+        for(String current:nodes){
+            if(NumberUtils.isNumber(current) && !current.isEmpty()){
+                switch (base) {
+                    case 10:
+                        tokens.push(new Number(Double.parseDouble(current)));
+                        break;
+                    case 2:
+                        tokens.push(new Number((double) Integer.parseInt(current, 2)));
+                        break;
+                    case 8:
+                        tokens.push(new Number((double) Integer.parseInt(current, 8)));
+                        break;
+                    case 16:
+                        tokens.push(new Number((double) Integer.parseInt(current, 16)));
+                        break;
+                    default:
+                        tokens.push(new Number(Double.parseDouble(current)));
+                }
+            }else if(!current.isEmpty()){
                     Expression b = (Expression) tokens.pop();
                     Expression a = (Expression) tokens.pop();
                     tokens.push(new Tree(current, a , b));
