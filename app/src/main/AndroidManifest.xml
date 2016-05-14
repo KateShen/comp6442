@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="CALCULATE"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light">
         <activity android:name=".MainActivity">
@@ -17,11 +17,18 @@
         </activity>
         <activity
             android:name=".ListsActivity"
+            android:label="HISTORY"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BinaryActivity"
+            android:label="BINARY CALCULATE"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".LogicalActivity"></activity>
+        <activity
+            android:name=".LogicalActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="LOGICAL">
+
+        </activity>
     </application>
 
 </manifest>

@@ -18,6 +18,11 @@ public class Tree extends Expression {
         this.right = right;
     }
 
+    public Tree(String data, Expression left){
+        this.node = data;
+        this.left = left;
+    }
+
     public double evaluate(){
         switch(node){
             case "+": return left.evaluate() + right.evaluate();
@@ -26,6 +31,10 @@ public class Tree extends Expression {
             case "/": return left.evaluate() / right.evaluate();
             case "%": return left.evaluate() % right.evaluate();
             case "^": return Math.pow(left.evaluate(), right.evaluate());
+            case "&": return (int)left.evaluate() & (int)right.evaluate();
+            case "|": return (int)left.evaluate() | (int)right.evaluate();
+            case "~": return ~ (int)left.evaluate();
+            case "⊕": return (int)left.evaluate() ^ (int)right.evaluate();
             default : return Double.parseDouble(node);
         }
     }
@@ -62,10 +71,14 @@ public class Tree extends Expression {
                         tokens.push(new Number(Double.parseDouble(current)));
                 }
             }else if(!current.isEmpty()){
+                if(current.equals("~")) {
+                    Expression a = (Expression) tokens.pop();
+                    tokens.push(new Tree(current, a));
+                } else {
                     Expression b = (Expression) tokens.pop();
                     Expression a = (Expression) tokens.pop();
-                    tokens.push(new Tree(current, a , b));
-                //tokens.push(new Tree(current, a , b));
+                    tokens.push(new Tree(current, a, b));
+                }
             }
         }
         return (Expression) tokens.pop();

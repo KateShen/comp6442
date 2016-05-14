@@ -29,17 +29,24 @@ public class Transforming {
             switch (specificchar) {
                 case '+':
                 case '-':
+                case '|':
+                case '⊕':
                     compareandadd(specificchar, 1);
                     ischar = true;
                     break;
                 case '*':
                 case '/':
                 case '%':
+                case '&':
                     compareandadd(specificchar, 2);
                     ischar = true;
                     break;
                 case '^':
                     compareandadd(specificchar, 3);
+                    ischar = true;
+                    break;
+                case '~':
+                    compareandadd(specificchar, 4);
                     ischar = true;
                     break;
                 case '(':
@@ -76,12 +83,14 @@ public class Transforming {
                 break;
             } else {
                 int status2 = 0;
-                if (inlist == '+' || inlist == '-'){
+                if (inlist == '+' || inlist == '-' || inlist == '|' || inlist == '⊕'){
                     status2 = 1;
-                } else if(inlist == '*' || inlist == '/' || inlist == '%') {
+                } else if(inlist == '*' || inlist == '/' || inlist == '%' || inlist == '&') {
                     status2 = 2;
                 } else if (inlist == '^') {
                     status2 = 3;
+                } else if(inlist == '~') {
+                    status2 = 4;
                 }
                 if (status2 < status){
                     stackfortrans.push(inlist);
