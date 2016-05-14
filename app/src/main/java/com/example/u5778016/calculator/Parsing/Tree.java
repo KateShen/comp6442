@@ -31,6 +31,11 @@ public class Tree extends Expression {
             case "/": return left.evaluate() / right.evaluate();
             case "%": return left.evaluate() % right.evaluate();
             case "^": return Math.pow(left.evaluate(), right.evaluate());
+            case "s": return Math.sin(Math.toRadians(left.evaluate()));
+            case "c": return Math.cos(Math.toRadians(left.evaluate()));
+            case "t": return Math.tan(Math.toRadians(left.evaluate()));
+            case "g": return Math.log10(left.evaluate());
+            case "n": return Math.log(left.evaluate());
             case "&": return (int)left.evaluate() & (int)right.evaluate();
             case "|": return (int)left.evaluate() | (int)right.evaluate();
             case "~": return ~ (int)left.evaluate();
@@ -71,7 +76,7 @@ public class Tree extends Expression {
                         tokens.push(new Number(Double.parseDouble(current)));
                 }
             }else if(!current.isEmpty()){
-                if(current.equals("~")) {
+                if(current.equals("~")||current.equals("s")||current.equals("c") ||current.equals("t") ||current.equals("g")||current.equals("n")) {
                     Expression a = (Expression) tokens.pop();
                     tokens.push(new Tree(current, a));
                 } else {

@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.u5778016.calculator.Parsing.Tree;
+
 public class MainActivity extends Activity {
     private EditText input;
     private String inputString;
@@ -164,12 +166,48 @@ public class MainActivity extends Activity {
     }
 
     public void analysisinput(View view){
+        String str1;
+        String str2;
         inputString = input.getText().toString();
+        if (inputString.contains("sin")){
+            str1="sin";
+            str2="s";
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
 
-        if (inputString.equals("") || inputString==null){Toast.makeText(MainActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
+        }if (inputString.contains("cos")){
+            str1="cos";
+            str2="c";
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+        }
+        if (inputString.contains("tan")){
+            str1="tan";
+            str2="t";
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+            //System.out.println(inputString);
+        }
+        if (inputString.contains("lg")){
+            str1="lg";
+            str2="g";
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+            //System.out.println(inputString);
+        }
+        if (inputString.contains("ln")){
+            str1="ln";
+            str2="n";
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+            //System.out.println(inputString);
+        }
+
+        if (inputString.equals("") || inputString==null){
+            Toast.makeText(MainActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
         }
         else {
-            double aftercalcu = Formula.getInstnace().formula(inputString);
+            double aftercalcu = Tree.generate(inputString, 10).evaluate();
             if(aftercalcu % 1 == 0)
                 input.setText(Integer.toString((int) aftercalcu));
             else

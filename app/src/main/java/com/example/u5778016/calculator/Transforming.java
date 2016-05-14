@@ -46,6 +46,11 @@ public class Transforming {
                     ischar = true;
                     break;
                 case '~':
+                case 's':
+                case 'c':
+                case 't':
+                case 'g':
+                case 'n':
                     compareandadd(specificchar, 4);
                     ischar = true;
                     break;
@@ -89,7 +94,7 @@ public class Transforming {
                     status2 = 2;
                 } else if (inlist == '^') {
                     status2 = 3;
-                } else if(inlist == '~') {
+                } else if(inlist == '~'||inlist=='s'||inlist=='c'||inlist=='t'||inlist=='g'||inlist=='n') {
                     status2 = 4;
                 }
                 if (status2 < status){
