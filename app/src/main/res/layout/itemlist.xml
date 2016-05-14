@@ -10,12 +10,12 @@
         android:textStyle="bold"
         android:padding="2dp"/>
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:padding="2dp"
-        android:color="#0000cc"/>
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:color="#0000cc"/>
 
     <TextView
         android:id="@+id/time"
