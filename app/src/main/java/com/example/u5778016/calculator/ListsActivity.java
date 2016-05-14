@@ -77,4 +77,9 @@ public class ListsActivity extends ListActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+    }
 }

@@ -150,6 +150,10 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, ListsActivity.class);
             startActivity(intent);
             return true;
+        } else if(id == R.id.action_binary){
+            Intent intent = new Intent(this, BinaryActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
 

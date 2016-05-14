@@ -50,7 +50,7 @@ public class Tree extends Expression {
                         tokens.push(new Number(Double.parseDouble(current)));
                         break;
                     case 2:
-                        tokens.push(new Number((double) Integer.parseInt(current, 2)));
+                        tokens.push(new Number(BaseConversion.Binary_to_Decimal(current)));
                         break;
                     case 8:
                         tokens.push(new Number((double) Integer.parseInt(current, 8)));
