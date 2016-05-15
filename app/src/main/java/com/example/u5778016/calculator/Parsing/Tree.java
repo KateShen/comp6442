@@ -58,7 +58,7 @@ public class Tree extends Expression {
 
         Stack tokens = new Stack();
         for(String current:nodes){
-            if(NumberUtils.isNumber(current) && !current.isEmpty()){
+            if((NumberUtils.isNumber(current) || isHex(current)) && !current.isEmpty()){
                 switch (base) {
                     case 10:
                         tokens.push(new Number(Double.parseDouble(current)));
@@ -67,10 +67,10 @@ public class Tree extends Expression {
                         tokens.push(new Number(BaseConversion.Binary_to_Decimal(current)));
                         break;
                     case 8:
-                        tokens.push(new Number((double) Integer.parseInt(current, 8)));
+                        tokens.push(new Number(BaseConversion.Octal_to_Decimal(current)));
                         break;
                     case 16:
-                        tokens.push(new Number((double) Integer.parseInt(current, 16)));
+                        tokens.push(new Number(BaseConversion.Hex_to_Decimal(current)));
                         break;
                     default:
                         tokens.push(new Number(Double.parseDouble(current)));
@@ -87,5 +87,18 @@ public class Tree extends Expression {
             }
         }
         return (Expression) tokens.pop();
+    }
+
+    private static boolean isHex(String input){
+        if(input.contains(".")){
+            String part[] = input.split("\\.");
+            System.out.println("is fractional hex");
+            return part.length == 2 && part[0].matches("-?[0-9A-F]+") && part[1].matches("-?[0-9A-F]+");
+
+        }else{
+            System.out.println("is hex");
+            return input.matches("-?[0-9A-F]+");
+        }
+
     }
 }

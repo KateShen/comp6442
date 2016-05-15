@@ -9,6 +9,16 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/action_octal"
+        android:title="Octal"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_hex"
+        android:title="Hex"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/action_logical"
         android:title="Logical"
         app:showAsAction="never"/>

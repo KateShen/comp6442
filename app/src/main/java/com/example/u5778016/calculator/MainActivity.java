@@ -160,6 +160,14 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, LogicalActivity.class);
             startActivity(intent);
             return true;
+        }else if (id == R.id.action_octal) {
+            Intent intent = new Intent(this, OctalActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_hex) {
+            Intent intent = new Intent(this, HexActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
 

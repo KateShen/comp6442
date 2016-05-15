@@ -25,10 +25,14 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LogicalActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".MainActivity" />
             android:label="LOGICAL">
-
-        </activity>
+        <activity
+            android:name=".OctalActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HexActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
