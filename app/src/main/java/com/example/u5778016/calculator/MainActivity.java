@@ -21,6 +21,7 @@ import com.example.u5778016.calculator.Parsing.Tree;
 public class MainActivity extends Activity {
     private EditText input;
     private String inputString;
+    private String InputforDatabase;
     private HistoryDB db;
 
     @Override
@@ -30,6 +31,7 @@ public class MainActivity extends Activity {
 
         input = (EditText)findViewById(R.id.field);
         input.setBackgroundColor(Color.parseColor("#ffeeaa"));
+
         db = new HistoryDB(this);
 
         /*GradientDrawable drawable = new GradientDrawable();
@@ -178,6 +180,7 @@ public class MainActivity extends Activity {
     public void analysisinput(View view){
         String str1;
         String str2;
+        InputforDatabase=input.getText().toString();
         inputString = input.getText().toString();
         if (inputString.contains("sin")){
             str1="sin";
@@ -242,7 +245,7 @@ public class MainActivity extends Activity {
     }
 
     public void save() {
-        String formula = inputString;
+        String formula = InputforDatabase;//a
         String result = input.getText().toString();
         /*judge whether formula or result is null
           If yes, it will give a toast. If no, it will put formula and result insert into database.
@@ -260,7 +263,7 @@ public class MainActivity extends Activity {
     public final int ToDatabase()
     {
         //put formula and result to the database
-        String formula = inputString;
+        String formula = InputforDatabase;//a
         String result = input.getText().toString();
         int newId = -1;
         History newNote = new History(formula, result);
