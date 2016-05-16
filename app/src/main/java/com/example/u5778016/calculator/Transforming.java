@@ -1,5 +1,11 @@
 package com.example.u5778016.calculator;
 
+import android.app.Dialog;
+import android.widget.Toast;
+
+import com.example.u5778016.calculator.Parsing.Invalid;
+
+
 /**
  * Created by u5778016 on 13/04/16.
  */
@@ -15,69 +21,85 @@ public class Transforming {
     }
 
     public String doTransform(){
+        int c=0;
+        int d=0;
+        for (int j=0;j<input.length();j++){
 
-        boolean ischar = false;
-        for(int i = 0; i < input.length(); i++) {
-            char specificchar = input.charAt(i);
-            if(specificchar == ' ') {
-                continue;
-            } else if(specificchar == '-' && (output.equals("") || ischar)) {
-                output = output + "#" + specificchar;
-                ischar = false;
-                continue;
+            char specificjudge=input.charAt(j);
+            if (specificjudge=='('){
+                c++;
+            }else if (specificjudge==')'){
+                d++;
             }
-            switch (specificchar) {
-                case '+':
-                case '-':
-                case '|':
-                case '⊕':
-                    compareandadd(specificchar, 1);
-                    ischar = true;
-                    break;
-                case '*':
-                case '/':
-                case '%':
-                case '&':
-                    compareandadd(specificchar, 2);
-                    ischar = true;
-                    break;
-                case '^':
-                    compareandadd(specificchar, 3);
-                    ischar = true;
-                    break;
-                case '~':
-                case 's':
-                case 'c':
-                case 't':
-                case 'g':
-                case 'n':
-                    compareandadd(specificchar, 4);
-                    ischar = true;
-                    break;
-                case '(':
-                    stackfortrans.push(specificchar);
-                    ischar = true;
-                    break;
-                case ')':
-                    getLast(specificchar);
-                    ischar = true;
-                    break;
-                default:
-                    if(!ischar) {
-                        output = output + specificchar;
-                    } else {
-                        output = output + "#" + specificchar;
-                    }
+        }
+
+        if (c==d){
+           //Toast.makeText(this,"a",Toast.LENGTH_LONG).show();
+            //JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+            boolean ischar = false;
+            for (int i = 0; i < input.length(); i++) {
+                char specificchar = input.charAt(i);
+                if (specificchar == ' ') {
+                    continue;
+                } else if (specificchar == '-' && (output.equals("") || ischar)) {
+                    output = output + "#" + specificchar;
                     ischar = false;
-                    break;
+                    continue;
+                }
+                switch (specificchar) {
+                    case '+':
+                    case '-':
+                    case '|':
+                    case '⊕':
+                        compareandadd(specificchar, 1);
+                        ischar = true;
+                        break;
+                    case '*':
+                    case '/':
+                    case '%':
+                    case '&':
+                        compareandadd(specificchar, 2);
+                        ischar = true;
+                        break;
+                    case '^':
+                        compareandadd(specificchar, 3);
+                        ischar = true;
+                        break;
+                    case '~':
+                    case 's':
+                    case 'c':
+                    case 't':
+                    case 'g':
+                    case 'n':
+                        compareandadd(specificchar, 4);
+                        ischar = true;
+                        break;
+                    case '(':
+                        stackfortrans.push(specificchar);
+                        ischar = true;
+                        break;
+                    case ')':
+                        getLast(specificchar);
+                        ischar = true;
+                        break;
+                    default:
+                        if (!ischar) {
+                            output = output + specificchar;
+                        } else {
+                            output = output + "#" + specificchar;
+                        }
+                        ischar = false;
+                        break;
+                }
+            }while (!stackfortrans.isEmpty()){
+                output=output + "#" + stackfortrans.pop();
             }
+            return output;
+        } else {
+            return "";
         }
-
-        while (!stackfortrans.isEmpty()){
-            output=output + "#" + stackfortrans.pop();
-        }
-        return output;
     }
+
 
 
     public void compareandadd(char inputstr,int status){

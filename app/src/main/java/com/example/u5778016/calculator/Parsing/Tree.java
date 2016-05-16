@@ -1,5 +1,7 @@
 package com.example.u5778016.calculator.Parsing;
 
+import android.widget.Toast;
+
 import com.example.u5778016.calculator.Transforming;
 
 import java.util.*;
@@ -52,67 +54,67 @@ public class Tree extends Expression {
         //Transform the string to postfix
         Transforming t = new Transforming(infix);
         String postfix = t.doTransform();
+        if(postfix == "") {
+            return new Invalid();
+        } else {
 
-        //Transform it to an ArrayList of tokens
-        ArrayList<String> nodes = new ArrayList<>(Arrays.asList(postfix.split("#")));
+            //Transform it to an ArrayList of tokens
+            ArrayList<String> nodes = new ArrayList<>(Arrays.asList(postfix.split("#")));
 
-        Stack tokens = new Stack();
-        for(String current:nodes){
-            if((NumberUtils.isNumber(current) || isHex(current)) && !current.isEmpty()){
-                switch (base) {
-                    case 10:
-                        tokens.push(new Number(Double.parseDouble(current)));
-                        break;
-                    case 2:
-                        tokens.push(new Number(BaseConversion.Binary_to_Decimal(current)));
-                        break;
-                    case 8:
-                        tokens.push(new Number(BaseConversion.Octal_to_Decimal(current)));
-                        break;
-                    case 16:
-                        tokens.push(new Number(BaseConversion.Hex_to_Decimal(current)));
-                        break;
-                    default:
-                        tokens.push(new Number(Double.parseDouble(current)));
-                }
-            }else if(!current.isEmpty()){
-                tokens.size();
-                if (current.equals("-")){
-                    if (tokens.size()==1){
+            Stack tokens = new Stack();
+            for (String current : nodes) {
+                if ((NumberUtils.isNumber(current) || isHex(current)) && !current.isEmpty()) {
+                    switch (base) {
+                        case 10:
+                            tokens.push(new Number(Double.parseDouble(current)));
+                            break;
+                        case 2:
+                            tokens.push(new Number(BaseConversion.Binary_to_Decimal(current)));
+                            break;
+                        case 8:
+                            tokens.push(new Number(BaseConversion.Octal_to_Decimal(current)));
+                            break;
+                        case 16:
+                            tokens.push(new Number(BaseConversion.Hex_to_Decimal(current)));
+                            break;
+                        default:
+                            tokens.push(new Number(Double.parseDouble(current)));
+                    }
+                } else if (!current.isEmpty()) {
+                    tokens.size();
+                    if (current.equals("-")) {
+                        if (tokens.size() == 1) {
+                            Expression a = (Expression) tokens.pop();
+                            tokens.push(new Tree(current, a));
+                        } else {
+                            Expression b = (Expression) tokens.pop();
+                            Expression a = (Expression) tokens.pop();
+                            tokens.push(new Tree(current, a, b));
+                        }
+                    } else if (current.equals("+")) {
+                        if (tokens.size() == 1) {
+                            Expression a = (Expression) tokens.pop();
+                            tokens.push(a);
+                        } else {
+                            Expression b = (Expression) tokens.pop();
+                            Expression a = (Expression) tokens.pop();
+                            tokens.push(new Tree(current, a, b));
+                        }
+                    } else if (current.equals("~") || current.equals("s") || current.equals("c") || current.equals("t") || current.equals("g") || current.equals("n")) {
                         Expression a = (Expression) tokens.pop();
                         tokens.push(new Tree(current, a));
-                    }
-                    else {
+                    } else {
+                        if (tokens.size() == 1) {
+                            return new Invalid();
+                        }
                         Expression b = (Expression) tokens.pop();
                         Expression a = (Expression) tokens.pop();
                         tokens.push(new Tree(current, a, b));
                     }
-                }
-
-                else if (current.equals("+")){
-                    if (tokens.size()==1){
-                        Expression a = (Expression) tokens.pop();
-                        tokens.push(a);
-                    }
-                    else {
-                        Expression b = (Expression) tokens.pop();
-                        Expression a = (Expression) tokens.pop();
-                        tokens.push(new Tree(current, a, b));
-                    }
-                }
-                 else if(current.equals("(") || current.equals(")")) {
-                    return new Invalid();
-                } else if(current.equals("~")||current.equals("s")||current.equals("c") ||current.equals("t") ||current.equals("g")||current.equals("n")) {
-                    Expression a = (Expression) tokens.pop();
-                    tokens.push(new Tree(current, a));
-                } else {
-                    Expression b = (Expression) tokens.pop();
-                    Expression a = (Expression) tokens.pop();
-                    tokens.push(new Tree(current, a, b));
                 }
             }
+            return (Expression) tokens.pop();
         }
-        return (Expression) tokens.pop();
     }
 
     private static boolean isHex(String input){
