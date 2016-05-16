@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_binary"
+        android:title="Binary"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_octal"
+        android:title="Octal"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_hex"
+        android:title="Hex"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_logical"
+        android:title="Logical"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_view"
+        android:title="ViewAll"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_exit"
+        android:title="Exit"
+        app:showAsAction="never"/>
 
 </menu>
