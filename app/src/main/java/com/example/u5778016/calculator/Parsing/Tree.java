@@ -92,11 +92,9 @@ public class Tree extends Expression {
     private static boolean isHex(String input){
         if(input.contains(".")){
             String part[] = input.split("\\.");
-            System.out.println("is fractional hex");
             return part.length == 2 && part[0].matches("-?[0-9A-F]+") && part[1].matches("-?[0-9A-F]+");
 
         }else{
-            System.out.println("is hex");
             return input.matches("-?[0-9A-F]+");
         }
 
