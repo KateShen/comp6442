@@ -60,22 +60,37 @@ public class ListsActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //Top menu bar
-        switch (item.getItemId()) {
-            case R.id.action_add:		//add
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_exit:	//exit
-                Intent intent3 = new Intent(Intent.ACTION_MAIN);
-                intent3.addCategory(Intent.CATEGORY_HOME);
-                intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent3);
-                android.os.Process.killProcess(android.os.Process.myPid());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.action_exit) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            return true;
+        } else if(id == R.id.action_view) {
+            Intent intent = new Intent(this, ListsActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(id == R.id.action_binary){
+            Intent intent = new Intent(this, BinaryActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(id == R.id.action_logical) {
+            Intent intent = new Intent(this, LogicalActivity.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.action_octal) {
+            Intent intent = new Intent(this, OctalActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_hex) {
+            Intent intent = new Intent(this, HexActivity.class);
+            startActivity(intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
