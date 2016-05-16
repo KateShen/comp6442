@@ -8,7 +8,7 @@ public class ReStack {
     private char[] charnum;
     private int thefirstone;
 
-
+    // create a stack constructor
     public ReStack(int s){
         maxsize = s;
         charnum = new char[s];
@@ -19,10 +19,11 @@ public class ReStack {
         charnum = new char[maxsize];
         thefirstone = -1;
     }
-
+    //push the first number in
     public void push(char c){
         charnum[++thefirstone] = c;
     }
+    //pop the first number out
 
     public char pop(){
         return charnum[thefirstone--];

@@ -24,18 +24,18 @@ public class Transforming {
         int c=0;
         int d=0;
         for (int j=0;j<input.length();j++){
-
+    //identify each char in the input expression
             char specificjudge=input.charAt(j);
+           //calculate the "(" and ")" amount
             if (specificjudge=='('){
                 c++;
             }else if (specificjudge==')'){
                 d++;
             }
         }
-
+    // correct input will do transform to postfix
         if (c==d){
-           //Toast.makeText(this,"a",Toast.LENGTH_LONG).show();
-            //JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+
             boolean ischar = false;
             for (int i = 0; i < input.length(); i++) {
                 char specificchar = input.charAt(i);
@@ -46,6 +46,7 @@ public class Transforming {
                     ischar = false;
                     continue;
                 }
+                // add different weight in different operator
                 switch (specificchar) {
                     case '+':
                     case '-':
@@ -83,6 +84,7 @@ public class Transforming {
                         ischar = true;
                         break;
                     default:
+                        // separate the expression by #
                         if (!ischar) {
                             output = output + specificchar;
                         } else {
@@ -96,12 +98,13 @@ public class Transforming {
             }
             return output;
         } else {
+            // when the "(" are not equal with ")", then output is ""
             return "";
         }
     }
 
 
-
+// compare each operator weight and change the order
     public void compareandadd(char inputstr,int status){
         while (!stackfortrans.isEmpty()){
             char inlist = stackfortrans.pop();
@@ -123,13 +126,14 @@ public class Transforming {
                     stackfortrans.push(inlist);
                     break;
                 }else {
+                    //separate by #
                     output = output + "#" + inlist;
                 }
             }
         }
         stackfortrans.push(inputstr);
     }
-
+    //seperate by # and judge the operator whether is (
    public void getLast(char ch){
        while (! stackfortrans.isEmpty()){
            char inlist = stackfortrans.pop();

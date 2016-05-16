@@ -19,12 +19,12 @@ public class Tree extends Expression {
         this.left = left;
         this.right = right;
     }
-
+// Tree with only one node
     public Tree(String data, Expression left){
         this.node = data;
         this.left = left;
     }
-
+//different calculate function
     public double evaluate(){
         switch(node){
             case "+": return left.evaluate() + right.evaluate();
@@ -54,6 +54,7 @@ public class Tree extends Expression {
         //Transform the string to postfix
         Transforming t = new Transforming(infix);
         String postfix = t.doTransform();
+        //This is the way to identify whether the "(" and ")" is equal in expression
         if(postfix == "") {
             return new Invalid();
         } else {
@@ -83,6 +84,7 @@ public class Tree extends Expression {
                 } else if (!current.isEmpty()) {
                     tokens.size();
                     if (current.equals("-")) {
+                        //identify the unary operator -
                         if (tokens.size() == 1) {
                             Expression a = (Expression) tokens.pop();
                             tokens.push(new Tree(current, a));
@@ -92,6 +94,7 @@ public class Tree extends Expression {
                             tokens.push(new Tree(current, a, b));
                         }
                     } else if (current.equals("+")) {
+                        //identify the unary operator +
                         if (tokens.size() == 1) {
                             Expression a = (Expression) tokens.pop();
                             tokens.push(a);
@@ -104,6 +107,7 @@ public class Tree extends Expression {
                         Expression a = (Expression) tokens.pop();
                         tokens.push(new Tree(current, a));
                     } else {
+                        //wrong input such as "34*", one number and one operator
                         if (tokens.size() == 1) {
                             return new Invalid();
                         }
