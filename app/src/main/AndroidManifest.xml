@@ -7,7 +7,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="CALCULATE"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Holo.Light">
+        android:theme="@style/Eric"
+        >
+        //android:theme="@android:style/Theme.Holo.Light"
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

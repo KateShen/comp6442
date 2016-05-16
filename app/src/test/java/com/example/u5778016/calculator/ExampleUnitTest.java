@@ -20,8 +20,11 @@ public class ExampleUnitTest {
 
     @Test
     public void testEvaluate() throws Exception {
-        assertEquals(Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).evaluate(), 15828.4624546 , 0.001);
+        assertEquals(Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).evaluate(), 15828.4624546, 0.001);
         System.out.println("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2) equals " + Tree.generate("(1.3+0.2)*(38*(47.72/(56.3-24)))^(3.5-1.2)", 10).evaluate());
         assertEquals(Integer.toBinaryString((int) Tree.generate("(1 + 10)^(1 + 1 * 10)", 2).evaluate()), "11011");
+        Transforming t = new Transforming("3.5+-6.7*.8/*");
+        String postfix = t.doTransform();
+        System.out.println(postfix);
     }
 }
