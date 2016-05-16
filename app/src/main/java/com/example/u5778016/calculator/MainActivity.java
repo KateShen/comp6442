@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.u5778016.calculator.Parsing.Expression;
+import com.example.u5778016.calculator.Parsing.Invalid;
 import com.example.u5778016.calculator.Parsing.Tree;
 
 public class MainActivity extends Activity {
@@ -213,14 +215,20 @@ public class MainActivity extends Activity {
 
         if (inputString.equals("") || inputString==null){
             Toast.makeText(MainActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
-        }
-        else {
-            double aftercalcu = Tree.generate(inputString, 10).evaluate();
-            if(aftercalcu % 1 == 0)
-                input.setText(Integer.toString((int) aftercalcu));
-            else
-                input.setText(Double.toString(aftercalcu));
-            save();
+        } else {
+            Expression result = Tree.generate(inputString, 10);
+            if (result instanceof Invalid) {
+            Toast.makeText(MainActivity.this, "Input Error", Toast.LENGTH_SHORT).show();
+                input.setText("");
+            } else {
+                double aftercalcu = result.evaluate();
+                if(aftercalcu % 1 == 0)
+                    input.setText(Integer.toString((int) aftercalcu));
+                else
+                    input.setText(Double.toString(aftercalcu));
+                save();
+            }
+
         }
     }
 

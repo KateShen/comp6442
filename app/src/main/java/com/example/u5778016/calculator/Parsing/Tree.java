@@ -76,7 +76,9 @@ public class Tree extends Expression {
                         tokens.push(new Number(Double.parseDouble(current)));
                 }
             }else if(!current.isEmpty()){
-                if(current.equals("~")||current.equals("s")||current.equals("c") ||current.equals("t") ||current.equals("g")||current.equals("n")) {
+                if(current.equals("(") || current.equals(")")) {
+                    return new Invalid();
+                } else if(current.equals("~")||current.equals("s")||current.equals("c") ||current.equals("t") ||current.equals("g")||current.equals("n")) {
                     Expression a = (Expression) tokens.pop();
                     tokens.push(new Tree(current, a));
                 } else {
