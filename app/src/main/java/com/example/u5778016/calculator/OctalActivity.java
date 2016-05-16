@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -87,6 +89,46 @@ public class OctalActivity extends Activity {
                 }
             });
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_exit) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            return true;
+        } else if(id == R.id.action_view) {
+            Intent intent = new Intent(this, ListsActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(id == R.id.action_binary){
+            Intent intent = new Intent(this, BinaryActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(id == R.id.action_logical) {
+            Intent intent = new Intent(this, LogicalActivity.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.action_octal) {
+            Intent intent = new Intent(this, OctalActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_hex) {
+            Intent intent = new Intent(this, HexActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     public void analysisInput(View view){
