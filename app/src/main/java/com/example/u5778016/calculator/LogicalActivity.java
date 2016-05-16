@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.u5778016.calculator.Parsing.BaseConversion;
+import com.example.u5778016.calculator.Parsing.Expression;
+import com.example.u5778016.calculator.Parsing.Invalid;
 import com.example.u5778016.calculator.Parsing.Tree;
 
 public class LogicalActivity extends Activity {
@@ -144,15 +146,22 @@ public class LogicalActivity extends Activity {
 
     public void analysisinput(View view){
         inputString = input.getText().toString();
-
         if (inputString.equals("") || inputString==null){
-            Toast.makeText(LogicalActivity.this, "Nothing Input", Toast.LENGTH_LONG).show();
-        }
-        else {
-            double aftercalcu = Tree.generate(inputString, 10).evaluate();
-            //int a = Integer.valueOf(aftercalcu, 2).toString();
-            input.setText(Integer.toString((int) aftercalcu));
-            save();
+            Toast.makeText(LogicalActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
+        } else {
+            Expression result = Tree.generate(inputString, 10);
+            if (result instanceof Invalid) {
+                Toast.makeText(LogicalActivity.this, "Input Error", Toast.LENGTH_SHORT).show();
+                input.setText("");
+            } else {
+                double aftercalcu = result.evaluate();
+                if(aftercalcu % 1 == 0)
+                    input.setText(Integer.toString((int) aftercalcu));
+                else
+                    input.setText(Double.toString(aftercalcu));
+                save();
+            }
+
         }
     }
 

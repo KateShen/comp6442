@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.u5778016.calculator.Parsing.BaseConversion;
+import com.example.u5778016.calculator.Parsing.Expression;
+import com.example.u5778016.calculator.Parsing.Invalid;
 import com.example.u5778016.calculator.Parsing.Tree;
 
 public class BinaryActivity extends Activity {
@@ -113,15 +115,24 @@ public class BinaryActivity extends Activity {
 
     }
 
-    public void analysisInput(View view){
+    public void analysisInput(View view) {
         inputString = input.getText().toString();
-        if (inputString.equals("")){
-            Toast.makeText(this, "Nothing Input", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            double aftercalcu = Tree.generate(inputString, 2).evaluate();
-            input.setText(BaseConversion.Decimal_to_Binary(aftercalcu));
-            save();
+        if (inputString.equals("") || inputString==null){
+            Toast.makeText(BinaryActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
+        } else {
+            Expression result = Tree.generate(inputString, 2);
+            if (result instanceof Invalid) {
+                Toast.makeText(BinaryActivity.this, "Input Error", Toast.LENGTH_SHORT).show();
+                input.setText("");
+            } else {
+                double aftercalcu = result.evaluate();
+                if(aftercalcu % 1 == 0)
+                    input.setText(Integer.toString((int) aftercalcu));
+                else
+                    input.setText(Double.toString(aftercalcu));
+                save();
+            }
+
         }
     }
 
