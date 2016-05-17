@@ -1,5 +1,11 @@
 package com.example.u5778016.calculator;
 
+/**
+ * Author: Dong Luo (u5319900).
+ * File: OctalActivity.java
+ * Description: Calculate Octal only
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;

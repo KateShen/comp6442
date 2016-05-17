@@ -7,8 +7,10 @@ import com.example.u5778016.calculator.Transforming;
 import java.util.*;
 import org.apache.commons.lang3.math.NumberUtils;
 
-/**googl
- * Created by u5319900 on 23/04/16.
+/**
+ * Author Dong Luo (u5319900). Yu Shen (u5778016)
+ * File:Tree.java
+ * Description: create tree structure
  */
 public class Tree extends Expression {
     int subtrees;

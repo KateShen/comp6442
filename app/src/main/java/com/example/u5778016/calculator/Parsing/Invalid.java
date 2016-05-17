@@ -1,7 +1,9 @@
 package com.example.u5778016.calculator.Parsing;
 
 /**
- * Created by u5319900 on 30/04/16.
+ * Author: Dong Luo (u5319900)
+ * File: Invalid.java
+ * Description: Invalid class for identify
  */
 public class Invalid extends Expression {
 

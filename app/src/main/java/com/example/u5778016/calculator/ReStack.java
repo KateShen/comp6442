@@ -1,7 +1,9 @@
 package com.example.u5778016.calculator;
 
 /**
- * Created by u5778016 on 13/04/16.
+ * Author:Yu Shen (u5778016)
+ * File: ReStack.java
+ * Description: push and pop the data in stack
  */
 public class ReStack {
     private int maxsize;

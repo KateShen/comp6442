@@ -7,7 +7,9 @@ import com.example.u5778016.calculator.Parsing.Invalid;
 
 
 /**
- * Created by u5778016 on 13/04/16.
+ * Author:Yu Shen (u5778016)
+ * File: Transforming.java
+ * Description: expression translate to postfix expression
  */
 public class Transforming {
     private ReStack stackfortrans;
