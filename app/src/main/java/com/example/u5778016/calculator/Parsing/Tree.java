@@ -110,7 +110,7 @@ public class Tree extends Expression {
                             tokens.push(new Tree(current, a));
                         } else
                             return new Invalid();
-                    } else if(tokens.empty()) {
+                    } else if(tokens.empty()) {        //if appearance EmptyStackException, it will show "Input error"
                         return new Invalid();
                     } else {
                         //wrong input such as "34*", one number and one operator
