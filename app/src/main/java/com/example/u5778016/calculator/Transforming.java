@@ -67,6 +67,7 @@ public class Transforming {
                         ischar = true;
                         break;
                     case '~':
+                    case '√':
                     case 's':
                     case 'c':
                     case 't':
@@ -119,7 +120,7 @@ public class Transforming {
                     status2 = 2;
                 } else if (inlist == '^') {
                     status2 = 3;
-                } else if(inlist == '~'||inlist=='s'||inlist=='c'||inlist=='t'||inlist=='g'||inlist=='n') {
+                } else if(inlist == '√' || inlist == '~'||inlist=='s'||inlist=='c'||inlist=='t'||inlist=='g'||inlist=='n') {
                     status2 = 4;
                 }
                 if (status2 < status){

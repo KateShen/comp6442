@@ -33,6 +33,7 @@ public class Tree extends Expression {
             case "/": return left.evaluate() / right.evaluate();
             case "%": return left.evaluate() % right.evaluate();
             case "^": return Math.pow(left.evaluate(), right.evaluate());
+            case "√": return Math.sqrt(left.evaluate());
             case "s": return Math.sin(Math.toRadians(left.evaluate()));
             case "c": return Math.cos(Math.toRadians(left.evaluate()));
             case "t": return Math.tan(Math.toRadians(left.evaluate()));
@@ -103,9 +104,14 @@ public class Tree extends Expression {
                             Expression a = (Expression) tokens.pop();
                             tokens.push(new Tree(current, a, b));
                         }
-                    } else if (current.equals("~") || current.equals("s") || current.equals("c") || current.equals("t") || current.equals("g") || current.equals("n")) {
-                        Expression a = (Expression) tokens.pop();
-                        tokens.push(new Tree(current, a));
+                    } else if (current.equals("√") || current.equals("~") || current.equals("s") || current.equals("c") || current.equals("t") || current.equals("g") || current.equals("n")) {
+                        if(tokens.size() == 1) {
+                            Expression a = (Expression) tokens.pop();
+                            tokens.push(new Tree(current, a));
+                        } else
+                            return new Invalid();
+                    } else if(tokens.empty()) {
+                        return new Invalid();
                     } else {
                         //wrong input such as "34*", one number and one operator
                         if (tokens.size() == 1) {

@@ -189,27 +189,42 @@ public class MainActivity extends Activity {
             str2="c";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
-        }
-        if (inputString.contains("tan")){
+        }if (inputString.contains("tan")){
             str1="tan";
             str2="t";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
-        }
-        if (inputString.contains("lg")){
+        }if (inputString.contains("lg")){
             str1="lg";
             str2="g";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
-        }
-        if (inputString.contains("ln")){
+        }if (inputString.contains("ln")){
             str1="ln";
             str2="n";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
+        }if (inputString.contains("π")){
+            str1="π";
+            str2=String.valueOf(Math.PI);
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+
+        }if (inputString.contains("e")){
+            str1="e";
+            double e = 1.0;
+            double t = 1.0;
+            for(int i = 1; i < 20; i++) {
+                t /= i;
+                e += t;
+            }
+            str2=String.valueOf(e);
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+
         }
 
         if (inputString.equals("") || inputString==null){
