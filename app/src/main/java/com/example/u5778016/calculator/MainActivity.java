@@ -18,6 +18,12 @@ import com.example.u5778016.calculator.Parsing.Expression;
 import com.example.u5778016.calculator.Parsing.Invalid;
 import com.example.u5778016.calculator.Parsing.Tree;
 
+/**
+ * Author: Siqi Zhang (u5721067), Yu Shen (u5778016), Dong Luo (u5319900).
+ * File: MainActivity.java
+ * Description: This is the main page java class. It achieves the decimal operation.
+ */
+
 public class MainActivity extends Activity {
     private EditText input;
     private String inputString;

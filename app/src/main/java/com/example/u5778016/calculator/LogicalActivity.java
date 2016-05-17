@@ -15,6 +15,12 @@ import com.example.u5778016.calculator.Parsing.Expression;
 import com.example.u5778016.calculator.Parsing.Invalid;
 import com.example.u5778016.calculator.Parsing.Tree;
 
+/**
+ * Author: Siqi Zhang (u5721067).
+ * File: LogicalActivity.java
+ * Description: This part achieve logical operation function.
+ */
+
 public class LogicalActivity extends Activity {
     private EditText input;
     private String inputString;

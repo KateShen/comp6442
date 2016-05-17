@@ -8,6 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SimpleCursorAdapter;
 
+/**
+ * Author: Siqi Zhang (u5721067).
+ * File: ListsActivity.java
+ * Description: This part function is to list all histories that user inputted.
+ */
+
 public class ListsActivity extends ListActivity {
 
     public final static String EXTRA_HIS_ID = "CALCULATE";

@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by u5721067 on 20/04/16.
+ * Author: Siqi Zhang (u5721067).
+ * File: HistoryDB.java
+ * Description: This is the database function that to store all the history information. Create the database table.
  */
 public class HistoryDB extends SQLiteOpenHelper {
 

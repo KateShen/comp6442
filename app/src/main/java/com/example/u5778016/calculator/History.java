@@ -6,7 +6,9 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 
 /**
- * Created by u5721067 on 20/04/16.
+ * Author: Siqi Zhang (u5721067).
+ * File: History.java
+ * Description: This part is history structure. It contains get the date, get the formula, get the result, etc.
  */
 public class History {
     private int	_id;			//ID
