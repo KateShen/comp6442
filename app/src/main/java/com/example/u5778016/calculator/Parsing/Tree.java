@@ -11,16 +11,19 @@ import org.apache.commons.lang3.math.NumberUtils;
  * Created by u5319900 on 23/04/16.
  */
 public class Tree extends Expression {
+    int subtrees;
     String node;
     Expression left,right;
 
     public Tree(String data, Expression left, Expression right){
+        this.subtrees = 2;
         this.node = data;
         this.left = left;
         this.right = right;
     }
 // Tree with only one node
     public Tree(String data, Expression left){
+        this.subtrees = 1;
         this.node = data;
         this.left = left;
     }
@@ -89,20 +92,24 @@ public class Tree extends Expression {
                         if (tokens.size() == 1) {
                             Expression a = (Expression) tokens.pop();
                             tokens.push(new Tree(current, a));
-                        } else {
+                        } else if (tokens.size() >= 2){
                             Expression b = (Expression) tokens.pop();
                             Expression a = (Expression) tokens.pop();
                             tokens.push(new Tree(current, a, b));
+                        } else {
+                            return new Invalid();
                         }
                     } else if (current.equals("+")) {
                         //identify the unary operator +
                         if (tokens.size() == 1) {
                             Expression a = (Expression) tokens.pop();
                             tokens.push(a);
-                        } else {
+                        } else if (tokens.size() >= 2) {
                             Expression b = (Expression) tokens.pop();
                             Expression a = (Expression) tokens.pop();
                             tokens.push(new Tree(current, a, b));
+                        } else {
+                            return new Invalid();
                         }
                     } else if (current.equals("√") || current.equals("~") || current.equals("s") || current.equals("c") || current.equals("t") || current.equals("g") || current.equals("n")) {
                         if(tokens.size() == 1) {
@@ -110,20 +117,23 @@ public class Tree extends Expression {
                             tokens.push(new Tree(current, a));
                         } else
                             return new Invalid();
-                    } else if(tokens.empty()) {        //if appearance EmptyStackException, it will show "Input error"
-                        return new Invalid();
-                    } else {
+                    } else if(tokens.size() >= 2){
                         //wrong input such as "34*", one number and one operator
-                        if (tokens.size() == 1) {
-                            return new Invalid();
-                        }
                         Expression b = (Expression) tokens.pop();
                         Expression a = (Expression) tokens.pop();
                         tokens.push(new Tree(current, a, b));
+                    } else {
+                        return new Invalid();
                     }
                 }
             }
-            return (Expression) tokens.pop();
+
+            if (tokens.size() == 1){
+                return (Expression) tokens.pop();
+            }else{
+                return new Invalid();
+            }
+
         }
     }
 
@@ -137,4 +147,19 @@ public class Tree extends Expression {
         }
 
     }
+
+    public static boolean isValid(Expression expression){
+        if(expression instanceof Invalid){
+            return false;
+        }else if(expression instanceof  Tree){
+            if (((Tree) expression).subtrees == 2) {
+                return isValid(((Tree) expression).left) && isValid(((Tree) expression).right);
+            }else {
+                return  isValid(((Tree) expression).left);
+            }
+        }else{// It is a 'Number()'
+            return true;
+        }
+    }
+
 }

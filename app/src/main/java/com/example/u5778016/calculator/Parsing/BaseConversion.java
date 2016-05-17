@@ -4,7 +4,12 @@ package com.example.u5778016.calculator.Parsing;
  * Created by u5319900 on 14/05/16.
  */
 public class BaseConversion {
+
+    //Convert a string represents binary number to a double
     public static double Binary_to_Decimal(String b_string) {
+        boolean negative = b_string.charAt(0) == '-';
+        if (negative) b_string = b_string.substring(1);
+
         double d_number = 0;
         String whole,fraction;
         if(b_string.contains(".")) {
@@ -25,9 +30,12 @@ public class BaseConversion {
             d_number += Character.getNumericValue(whole.charAt(i - 1)) * Math.pow(2, whole.length() - i);
         }
 
+        if (negative) d_number *= -1;
+
         return d_number;
     }
 
+    //Convert a double to a string represents binary number
     public static String Decimal_to_Binary(double d_number) {
 
         boolean negative = (d_number < 0);
@@ -62,7 +70,11 @@ public class BaseConversion {
 
     }
 
+    //Convert a string represents ocrtal number to a double
     public static double Octal_to_Decimal(String o_string) {
+        boolean negative = o_string.charAt(0) == '-';
+        if (negative) o_string = o_string.substring(1);
+
         double d_number = 0;
         String whole,fraction;
         if(o_string.contains(".")) {
@@ -83,9 +95,11 @@ public class BaseConversion {
             d_number += Character.getNumericValue(whole.charAt(i - 1)) * Math.pow(8, whole.length() - i);
         }
 
+        if (negative) d_number *= -1;
         return d_number;
     }
 
+    //Convert a double to a string represents octal number
     public static String Decimal_to_Octal(double d_number) {
         boolean negative = (d_number < 0);
         if(negative) d_number *= -1;
@@ -119,7 +133,11 @@ public class BaseConversion {
 
     }
 
+    //Convert a string represents hexadecimal number to a double
     public static double Hex_to_Decimal(String h_string) {
+        boolean negative = h_string.charAt(0) == '-';
+        if (negative) h_string = h_string.substring(1);
+
         double d_number = 0;
         String whole,fraction;
         if(h_string.contains(".")) {
@@ -140,9 +158,11 @@ public class BaseConversion {
             d_number += Integer.parseInt(Character.toString(whole.charAt(i - 1)), 16) * Math.pow(16, whole.length() - i);
         }
 
+        if (negative) d_number *= -1;
         return d_number;
     }
 
+    //Convert a double to a string represents hexadecimal number
     public static String Decimal_to_Hex(double d_number) {
         boolean negative = (d_number < 0);
         if(negative) d_number *= -1;
