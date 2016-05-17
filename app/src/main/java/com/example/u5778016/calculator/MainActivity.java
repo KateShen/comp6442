@@ -32,13 +32,10 @@ public class MainActivity extends Activity {
         //set the input field background color
         input = (EditText)findViewById(R.id.field);
         input.setBackgroundColor(Color.parseColor("#ffeeaa"));
+
         db = new HistoryDB(this);
 
-        /*GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setStroke(2, Color.BLACK);*/
-
-
+        //button function, when you press a button, it will appear in the text field
         int idList[] = {R.id.bt_0, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.bt_7, R.id.bt_8, R.id.bt_9,
                 R.id.bt_div, R.id.bt_mul, R.id.bt_minus, R.id.bt_plus, R.id.bt_left, R.id.bt_right, R.id.bt_point, R.id.bt_lg, R.id.bt_ln,
                 R.id.bt_cos, R.id.bt_sin, R.id.bt_tan, R.id.bt_e, R.id.bt_pi, R.id.bt_power, R.id.bt_mod, R.id.bt_root};
