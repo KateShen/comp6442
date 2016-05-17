@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="CALCULATE"
+        android:label="Calculator"
         android:supportsRtl="true"
         android:theme="@style/Eric"
         >
@@ -21,21 +21,23 @@
         </activity>
         <activity
             android:name=".ListsActivity"
-            android:label="HISTORY"
+            android:label="History"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BinaryActivity"
-            android:label="BINARY CALCULATE"
+            android:label="Binary Calculator"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LogicalActivity"
-            android:parentActivityName=".MainActivity" />
-            android:label="LOGICAL">
+            android:parentActivityName=".MainActivity"
+            android:label="Logical Calculator"/>
         <activity
             android:name=".OctalActivity"
+            android:label="Octal Calculator"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".HexActivity"
+            android:label="Hex Calculator"
             android:parentActivityName=".MainActivity" />
     </application>
 

@@ -21,6 +21,7 @@ import com.example.u5778016.calculator.Parsing.Tree;
 public class MainActivity extends Activity {
     private EditText input;
     private String inputString;
+    private String InputforDatabase;
     private HistoryDB db;
 
     @Override
@@ -28,6 +29,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //set the input field background color
         input = (EditText)findViewById(R.id.field);
         input.setBackgroundColor(Color.parseColor("#ffeeaa"));
         db = new HistoryDB(this);
@@ -133,7 +135,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
+    //override the menu function
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -143,41 +145,42 @@ public class MainActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_exit) {
+        if (id == R.id.action_exit) {                 //exit the app
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             android.os.Process.killProcess(android.os.Process.myPid());
             return true;
-        } else if(id == R.id.action_view) {
+        } else if(id == R.id.action_view) {         //page jump to history
             Intent intent = new Intent(this, ListsActivity.class);
             startActivity(intent);
             return true;
-        } else if(id == R.id.action_binary){
+        } else if(id == R.id.action_binary){        //page jump to binary calculator
             Intent intent = new Intent(this, BinaryActivity.class);
             startActivity(intent);
             return true;
-        } else if(id == R.id.action_logical) {
+        } else if(id == R.id.action_logical) {     //page jump to logical calculator
             Intent intent = new Intent(this, LogicalActivity.class);
             startActivity(intent);
             return true;
-        }else if (id == R.id.action_octal) {
+        }else if (id == R.id.action_octal) {       //page jump to octal calculator
             Intent intent = new Intent(this, OctalActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_hex) {
+        } else if (id == R.id.action_hex) {        //page jump to hex calculator
             Intent intent = new Intent(this, HexActivity.class);
             startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     public void analysisinput(View view){
         String str1;
         String str2;
+        //get the string that you input
+        InputforDatabase=input.getText().toString();
         inputString = input.getText().toString();
         if (inputString.contains("sin")){
             str1="sin";
@@ -190,39 +193,58 @@ public class MainActivity extends Activity {
             str2="c";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
-        }
-        if (inputString.contains("tan")){
+        }if (inputString.contains("tan")){
             str1="tan";
             str2="t";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
-        }
-        if (inputString.contains("lg")){
+        }if (inputString.contains("lg")){
             str1="lg";
             str2="g";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
-        }
-        if (inputString.contains("ln")){
+        }if (inputString.contains("ln")){
             str1="ln";
             str2="n";
             //String inputupdate;
             inputString=inputString.replaceAll(str1,str2);
             //System.out.println(inputString);
+        }if (inputString.contains("π")){
+            str1="π";
+            str2=String.valueOf(Math.PI);
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+
+        }if (inputString.contains("e")){
+            str1="e";
+            double e = 1.0;
+            double t = 1.0;
+            for(int i = 1; i < 20; i++) {
+                t /= i;
+                e += t;
+            }
+            str2=String.valueOf(e);
+            //String inputupdate;
+            inputString=inputString.replaceAll(str1,str2);
+
         }
 
         if (inputString.equals("") || inputString==null){
+            //if this string is null, it will show "Noting Input"
             Toast.makeText(MainActivity.this,"Nothing Input",Toast.LENGTH_LONG).show();
         } else {
             Expression result = Tree.generate(inputString, 10);
             if (result instanceof Invalid) {
-            Toast.makeText(MainActivity.this, "Input Error", Toast.LENGTH_SHORT).show();
+                //if the expression which generated by tree is invalid, then it will show you "Input Error"
+                Toast.makeText(MainActivity.this, "Input Error", Toast.LENGTH_SHORT).show();
                 input.setText("");
             } else {
+                //if the expression is correct, then it will be calculated
                 double aftercalcu = result.evaluate();
                 if(aftercalcu % 1 == 0)
+                    //if the result is an Integer, show Integer, else show Double
                     input.setText(Integer.toString((int) aftercalcu));
                 else
                     input.setText(Double.toString(aftercalcu));
@@ -242,7 +264,7 @@ public class MainActivity extends Activity {
     }
 
     public void save() {
-        String formula = inputString;
+        String formula = InputforDatabase;//a
         String result = input.getText().toString();
         /*judge whether formula or result is null
           If yes, it will give a toast. If no, it will put formula and result insert into database.
@@ -260,7 +282,7 @@ public class MainActivity extends Activity {
     public final int ToDatabase()
     {
         //put formula and result to the database
-        String formula = inputString;
+        String formula = InputforDatabase;//a
         String result = input.getText().toString();
         int newId = -1;
         History newNote = new History(formula, result);
