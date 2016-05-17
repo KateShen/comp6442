@@ -133,11 +133,7 @@ public class BinaryActivity extends Activity {
             } else {
                 //if the expression is correct, then it will be calculated
                 double aftercalcu = result.evaluate();
-                //if the result is an Integer, show Integer, else show Double
-                if(aftercalcu % 1 == 0)
-                    input.setText(Integer.toString((int) aftercalcu));
-                else
-                    input.setText(Double.toString(aftercalcu));
+                input.setText(BaseConversion.Decimal_to_Binary(aftercalcu));
                 save();
             }
 

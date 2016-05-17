@@ -29,6 +29,10 @@ public class BaseConversion {
     }
 
     public static String Decimal_to_Binary(double d_number) {
+
+        boolean negative = (d_number < 0);
+        if(negative) d_number *= -1;
+
         double whole = Math.floor(d_number);
         double fraction = d_number - whole;
         int precision = 9;
@@ -51,7 +55,10 @@ public class BaseConversion {
         }else{
             //finished
         }
-        return b_string.toString();
+
+        String result = b_string.toString();
+        if(negative) result = "-" + result;
+        return result;
 
     }
 
@@ -80,6 +87,9 @@ public class BaseConversion {
     }
 
     public static String Decimal_to_Octal(double d_number) {
+        boolean negative = (d_number < 0);
+        if(negative) d_number *= -1;
+
         double whole = Math.floor(d_number);
         double fraction = d_number - whole;
         StringBuilder o_string = new StringBuilder();
@@ -102,7 +112,10 @@ public class BaseConversion {
         }else{
             //finished
         }
-        return o_string.toString();
+
+        String result = o_string.toString();
+        if(negative) result = "-" + result;
+        return result;
 
     }
 
@@ -131,6 +144,9 @@ public class BaseConversion {
     }
 
     public static String Decimal_to_Hex(double d_number) {
+        boolean negative = (d_number < 0);
+        if(negative) d_number *= -1;
+
         double whole = Math.floor(d_number);
         double fraction = d_number - whole;
         StringBuilder h_string = new StringBuilder();
@@ -168,7 +184,10 @@ public class BaseConversion {
         }else{
             //finished
         }
-        return h_string.toString();
+
+        String result = h_string.toString();
+        if(negative) result = "-" + result;
+        return result;
 
     }
 }

@@ -14,10 +14,17 @@ import static org.junit.Assert.*;
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
 public class ExampleUnitTest {
+    //
     @Test
     public void testTransform() throws Exception{
-        String infix = "5 + 2 * 3";
+        String infix = "5+2*3";
+        String infix2 = "  5     +  2 *    3";
+        String infix3 = "(5+2)*3";
         assertEquals(new Transforming(infix).doTransform(), "5#2#3#*#+");
+        assertEquals(new Transforming(infix2).doTransform(), "5#2#3#*#+");
+        System.out.println(new Transforming(infix3).doTransform());
+        assertTrue(new Transforming(infix3).doTransform() == "5#2#+#3#*"
+                || new Transforming(infix3).doTransform() == "#5#2#+#3#*");
     }
     @Test
     public void testParser() throws Exception {
